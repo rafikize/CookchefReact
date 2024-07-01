@@ -1,18 +1,21 @@
 import styles from "./Header.module.scss";
 import cookchef from "../../assets/images/cookchef.png";
 import { useState } from "react";
-import HeaderMenuXs from "./compenants/HeaderMenu/HeaderMenuXs";
+import HeaderMenu from "./components/HeaderMenu";
 
-function Header() {
+function Header({ setPage }) {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
     <header className={`${styles.header} d-flex flex-row align-items-center`}>
       <div className="flex-fill">
-        <img src={cookchef} alt="logo cookchef" />
+        <img onClick={() => setPage('homepage')} src={cookchef} alt="logo cookchef" />
       </div>
       <ul className={styles.headerList}>
-        <button className="mr-5 btn btn-reverse-primary">
+        <button onClick={() => setPage("admin")} className="btn btn-primary mr-15">
+          Ajouter une recette
+        </button>
+        <button className="mr-15 btn btn-reverse-primary">
           <i className="fa-solid fa-heart mr-5"></i>
           <span>Wishlist</span>
         </button>
@@ -20,12 +23,12 @@ function Header() {
       </ul>
       <i
         onClick={() => setShowMenu(true)}
-        className={`fa-solid fa-bars  ${styles.headerXs}`}
+        className={`fa-solid fa-bars ${styles.headerXs}`}
       ></i>
       {showMenu && (
         <>
-          <div onClick={() => setShowMenu(false)} className="clac"></div>
-          <HeaderMenuXs />
+          <div onClick={() => setShowMenu(false)} className="calc"></div>
+          <HeaderMenu setPage={setPage}/>
         </>
       )}
     </header>
