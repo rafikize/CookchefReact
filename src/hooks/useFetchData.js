@@ -12,8 +12,9 @@ export function useFetchData(url, page) {
         setIsLoading(true);
         const queryParam = new URLSearchParams();
         if (page) {
-          queryParam.append('limit', 18);
-          queryParam.append('skip', (page - 1) * 18);
+          queryParam.append('limit', 50);
+          queryParam.append('skip', (page - 1) * 50);
+          queryParam.append('sort', 'createdAt:desc');
         }
         const response = await fetch(url + `?${queryParam}`);
         if (response.ok && !cancel) {
